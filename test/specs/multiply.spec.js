@@ -12,6 +12,10 @@ describe('multiply', function() {
     calc = null;
   });
 
+  it('should throw an error if provided with not a number', function() {
+    expect(() => calc.multiply('a','b')).to.throw();
+  });
+
   it('should return 8 when called with numbers 2 and 4', function() {
     expect(calc.multiply(2, 4)).to.be.equal(8);
   });

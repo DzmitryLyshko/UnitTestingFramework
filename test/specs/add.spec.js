@@ -12,6 +12,10 @@ describe('add', function() {
     calc = null;
   });
 
+  it('should throw an error if provided with not a number', function() {
+    expect(() => calc.add('a','b')).to.throw();
+  });
+
   it('should return 6 when called with numbers 2 and 4', function() {
     expect(calc.add(2, 4)).to.be.equal(6);
   });

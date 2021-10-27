@@ -1,34 +1,24 @@
-const Calculator = require('../../app/calculator');
 const {expect} = require('chai');
 
-describe('multiply', function() {
-  let calc;
+const Calculator = require('../../app/calculator');
 
-  beforeEach(function() {
-    calc = new Calculator();
+const calc = new Calculator();
+
+describe('multiplication', function() {
+  const testData = [
+    {num1: 2, num2: 4, result: 8},
+    {num1: -3, num2: 5, result: -15},
+    {num1: -11, num2: 0, result: 0},
+    {num1: 7, num2: 0, result: 0},
+  ];
+
+  testData.forEach(({num1, num2, result}) => {
+    it(`should return ${result} when called with numbers ${num1} and ${num2}`, function() {
+      expect(calc.multiply(num1, num2)).to.be.equal(result);
+    });
   });
-
-  afterEach(function() {
-    calc = null;
-  });
-
+ 
   it('should throw an error if provided with not a number', function() {
-    expect(() => calc.multiply('a','b')).to.throw();
-  });
-
-  it('should return 8 when called with numbers 2 and 4', function() {
-    expect(calc.multiply(2, 4)).to.be.equal(8);
-  });
-
-  it('should return -15 when called with numbers -3 and 5', function() {
-    expect(calc.multiply(-3, 5)).to.be.equal(-15);
-  });
-
-  it('should return 0 when called with numbers -11 and 0', function() {
-    expect(calc.multiply(-11, 0)).to.be.equal(0);
-  });
-
-  it('should return 0 when called with numbers 7 and 0', function() {
-    expect(calc.multiply(7, 0)).to.be.equal(0);
+    expect(() => calc.multiply('a', 'b')).to.throw();
   });
 });

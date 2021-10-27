@@ -1,42 +1,26 @@
-const Calculator = require('../../app/calculator');
 const {expect} = require('chai');
 
-describe('add', function() {
-  let calc;
+const Calculator = require('../../app/calculator');
 
-  beforeEach(function() {
-    calc = new Calculator();
-  });
+const calc = new Calculator();
 
-  afterEach(function() {
-    calc = null;
+describe('addition', function() {
+  const testData = [
+    {num1:2, num2:4, result:6},
+    {num1:-2, num2:-4, result:-6},
+    {num1:23, num2:0, result:23},
+    {num1:0, num2:-42, result:-42},
+    {num1:77, num2:-22, result:55},
+    {num1:24, num2:-40, result:-16},
+  ];
+
+  testData.forEach(({num1, num2, result}) => {
+    it(`should return ${result} when called with numbers ${num1} and ${num2}`, function() {
+      expect(calc.add(num1, num2)).to.be.equal(result);
+    });
   });
 
   it('should throw an error if provided with not a number', function() {
-    expect(() => calc.add('a','b')).to.throw();
-  });
-
-  it('should return 6 when called with numbers 2 and 4', function() {
-    expect(calc.add(2, 4)).to.be.equal(6);
-  });
-
-  it('should return -6 when called with numbers -2 and -4', function() {
-    expect(calc.add(-2, -4)).to.be.equal(-6);
-  });
-
-  it('should return 23 when called with numbers 23 and 0', function() {
-    expect(calc.add(23, 0)).to.be.equal(23);
-  });
-
-  it('should return -42 when called with numbers 0 and -42', function() {
-    expect(calc.add(0, -42)).to.be.equal(-42);
-  });
-
-  it('should return 55 when called with numbers 77 and -22', function() {
-    expect(calc.add(77, -22)).to.be.equal(55);
-  });
-
-  it('should return -16 when called with numbers 24 and -40', function() {
-    expect(calc.add(24, -40)).to.be.equal(-16);
+    expect(() => calc.add('a', 'b')).to.throw();
   });
 });
